@@ -65,11 +65,9 @@ class AI(object):
                 first_move_pos = path[1]
                 move = self.map.get_move_from(self.player.pos,first_move_pos)
             return move
-        elif self.states.enemy_is_dangerous():
-            eudist = self.map.get_euclidean_dist(self.player.pos,self.enemy.pos)
-            print("HAPL! " + str())
+        elif self.states.enemy_is_dangerous():            
             if self.map.get_manhattan_dist(self.player.pos,self.enemy.pos) <= self.values.enemy_distance_trigger:
-                print("HAPL! 2 " + str(self.map.get_manhattan_dist(self.player.pos,self.enemy.pos)))
+                print("HAPL!")
                 return self.send_random_move()
             else:
                 print("Ima do me")
