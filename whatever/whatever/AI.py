@@ -47,19 +47,31 @@ class AI(object):
 
     def get_move(self): # AI LOGIC GOES HERE!
         if self.states.is_status_quo():
-            path = self.map.get_bf_path(self.player.pos,char_goal=self.map.icon.pellet)
+            print("Mmmm, shiny!")
+            path = self.map.get_bf_path(self.player.pos,char_goal=self.map.icon.pellet)            
             first_move_pos = path[1]
             move = self.map.get_move_from(self.player.pos,first_move_pos)
             return move
         elif self.states.you_are_dangerous():
-            path = self.map.get_bf_path(self.player.pos,pos_goal=self.enemy.pos)
-            first_move_pos = path[1]
-            move = self.map.get_move_from(self.player.pos,first_move_pos)
+            if self.map.get_euclidean_dist(self.you.pos, self.enemy.pos) <= self.values.enemy_distance_trigger:
+                print("Ima getcha!")
+                path = self.map.get_bf_path(self.player.pos,pos_goal=self.enemy.pos)
+                first_move_pos = path[1]
+                move = self.map.get_move_from(self.player.pos,first_move_pos)
+                return move
+            else:
+                print("Pft, cba chasing that guy")
+                path = self.map.get_bf_path(self.player.pos,char_goal=self.map.icon.pellet)
+                first_move_pos = path[1]
+                move = self.map.get_move_from(self.player.pos,first_move_pos)
             return move
         elif self.states.enemy_is_dangerous():
-            if self.map.get_euclidean_dist(self.you.pos,self.enemy.pos) <= self.values.enemy_distance_trigger:
+            print("HAPL! " + str(self.map.get_manhattan_dist(self.you.pos,self.enemy.pos)))
+            if self.map.get_manhattan_dist(self.you.pos,self.enemy.pos) <= self.values.enemy_distance_trigger:
+                print("HAPL! 2 " + str(self.map.get_manhattan_dist(self.you.pos,self.enemy.pos)))
                 return self.send_random_move()
             else:
+                print("Ima do me")
                 path = self.map.get_bf_path(self.player.pos,char_goal=self.map.icon.pellet)
                 first_move_pos = path[1]
                 return self.map.get_move_from(self.player.pos,first_move_pos)
@@ -76,7 +88,7 @@ class AI(object):
         return 10.0
 
 class Values(object):
-    def __init__(self,pellet_worth=1.0,super_pellet_worth=5.0,enemy_distance_trigger=100.0,monster_distance_trigger=9.0):
+    def __init__(self,pellet_worth=1.0,super_pellet_worth=5.0,enemy_distance_trigger=15.0,monster_distance_trigger=9.0):
         self.pellet_worth = pellet_worth
         self.super_pellet_worth = super_pellet_worth
         self.enemy_distance_trigger = enemy_distance_trigger

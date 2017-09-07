@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>301e5ec4-bf4e-477f-aa79-6e554bccee33</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>entrypoint_NAME.py</StartupFile>
+    <StartupFile>entrypoint_confused.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AI.py" />
-    <Compile Include="entrypoint_NAME.py" />
+    <Compile Include="entrypoint_confused.py" />
     <Compile Include="util\Client.py" />
     <Compile Include="util\Map.py" />
     <Compile Include="util\Message.py" />

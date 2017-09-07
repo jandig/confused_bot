@@ -125,6 +125,7 @@ class Map(object):
         while parent is not None:
             path.insert(0,parent)
             parent = came_from[parent]
+        if len(path) == 0 or len(path) == 1: print("WHAT!?")
         return path
 
     def update_content(self,msg,player_new_poses):
