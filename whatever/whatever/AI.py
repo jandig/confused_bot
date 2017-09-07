@@ -53,7 +53,7 @@ class AI(object):
             move = self.map.get_move_from(self.player.pos,first_move_pos)
             return move
         elif self.states.you_are_dangerous():
-            if self.map.get_euclidean_dist(self.you.pos, self.enemy.pos) <= self.values.enemy_distance_trigger:
+            if self.map.get_euclidean_dist(self.player.pos, self.enemy.pos) <= self.values.enemy_distance_trigger:
                 print("Ima getcha!")
                 path = self.map.get_bf_path(self.player.pos,pos_goal=self.enemy.pos)
                 first_move_pos = path[1]
@@ -66,9 +66,10 @@ class AI(object):
                 move = self.map.get_move_from(self.player.pos,first_move_pos)
             return move
         elif self.states.enemy_is_dangerous():
-            print("HAPL! " + str(self.map.get_manhattan_dist(self.you.pos,self.enemy.pos)))
-            if self.map.get_manhattan_dist(self.you.pos,self.enemy.pos) <= self.values.enemy_distance_trigger:
-                print("HAPL! 2 " + str(self.map.get_manhattan_dist(self.you.pos,self.enemy.pos)))
+            eudist = self.map.get_euclidean_dist(self.player.pos,self.enemy.pos)
+            print("HAPL! " + str())
+            if self.map.get_manhattan_dist(self.player.pos,self.enemy.pos) <= self.values.enemy_distance_trigger:
+                print("HAPL! 2 " + str(self.map.get_manhattan_dist(self.player.pos,self.enemy.pos)))
                 return self.send_random_move()
             else:
                 print("Ima do me")
